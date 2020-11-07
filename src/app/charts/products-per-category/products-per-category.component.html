@@ -1,0 +1,12 @@
+<div class="spinner-container">
+  <mat-spinner *ngIf="isLoading" diameter="50" color="primary"></mat-spinner>
+</div>
+<div style="display: block;" *ngIf="!isLoading">
+  <canvas baseChart
+    [data]="polarAreaChartData"
+    [labels]="polarAreaChartLabels"
+    [legend]="polarAreaLegend"
+    [chartType]="polarAreaChartType"
+    [colors]="polarAreaChartColors">
+  </canvas>
+</div>

@@ -1,0 +1,154 @@
+<div [ngClass]="{'grid-container' : showTitle}">
+  
+  <div class="products-title" *ngIf="showTitle">
+    <h1 class="mat-h1">Elenco Prodotti</h1>
+    <div class="header-buttons">
+      <button mat-flat-button (click)="dialogAddProd()" color="primary" aria-label="Add a Product Button">
+        Aggiungi un prodotto <mat-icon>add</mat-icon> 
+      </button>
+      <a mat-button color="primary" aria-label="Grid Panel Button" (click)="switchPanelGrid()">
+        Vista
+        <mat-icon *ngIf="panelGrid">view_stream</mat-icon>
+        <mat-icon *ngIf="!panelGrid"> view_module</mat-icon>
+      </a>
+    </div>
+  </div>
+  <hr *ngIf="showTitle">
+  <div class="products-title" *ngIf="!showTitle">
+    <button mat-flat-button (click)="dialogAddProd()" color="primary" aria-label="Add a Product Button">
+      Aggiungi un prodotto <mat-icon>add</mat-icon>
+    </button>
+    <a mat-button color="primary" aria-label="Grid Panel Button" (click)="switchPanelGrid()">
+      Vista
+      <mat-icon *ngIf="panelGrid">view_stream</mat-icon>
+      <mat-icon *ngIf="!panelGrid">view_module</mat-icon>
+    </a>
+  </div>
+  <br>
+  
+  <div class="spinner-container">
+    <mat-spinner *ngIf="isLoading" diameter="50" color="primary"></mat-spinner>
+  </div>
+
+  <!-- TABLE -->
+  <!-- 
+    <table id="users">
+    <tr>
+      <th>
+        <h3>Nome</h3>
+      </th>
+      <th>
+        <h3>Descrizione</h3>
+      </th>
+    </tr>
+    <tr *ngFor = "let product of products">
+      <td><p>{{ product.name }}</p></td>
+      <td><p>{{ product.description }}</p></td>
+    </tr>
+  </table> 
+  -->
+
+  <!-- PANEL -->
+  <mat-accordion *ngIf="!panelGrid" >
+    <mat-expansion-panel *ngFor="let product of products | async" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>{{ product.data.title }}</strong>
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <p>
+        <strong>Prezzo:</strong> {{ product.data.price }} € <br>
+        <strong>Categoria:</strong> {{ product.data.category }} <br>
+        <strong>Dipendente:</strong> {{ product.data.employee }} <br>
+        <strong>Descrizione:</strong> {{ product.data.description }}
+      </p>
+      <hr>
+
+      <h4><strong>Recensioni</strong></h4>
+      <!-- REVIEW -->
+      <!-- <div class="review" *ngFor="let review of reviews"> -->
+      <!-- <div class="review" *ngFor="let review of product.data.reviews">
+        <p class="review-rating" *ngIf="review.rating">
+          <fa-icon [icon]="faStar"></fa-icon>
+          <fa-icon [icon]="faStar"></fa-icon>
+          <fa-icon [icon]="farStar"></fa-icon>
+          <fa-icon [icon]="farStar"></fa-icon>
+          <fa-icon [icon]="farStar"></fa-icon>
+        </p>
+        <p class="review-summary">{{ review?.title }}</p>
+        <p class="review-feedback">{{ review?.description }}</p>
+        <p class="reviewBy">
+          <span class="review-date">{{ (review?.reviewDate ?  review?.reviewDate : 1581470956443) | date}}</span>
+          by
+          <span class="review-author">{{ review?.user }}</span>
+        </p>
+      </div> 
+      <ng-container *ngIf="!product.data.reviews">
+        <p>Non sono presenti recensioni per questo prodotto.</p>
+      </ng-container>
+      -->
+
+      <div class="products-title">
+        <div>
+          <ng-container *ngIf="!product.data.reviews">
+            <p>Non sono presenti recensioni per questo prodotto.</p>
+            <br>
+          </ng-container>
+          <button *ngIf="product.data.reviews" mat-flat-button [routerLink]="['/recensioni', product.id]" color="primary" class="edit-button" aria-label="icon button with a review icon">
+            Vai a recensioni <mat-icon>rate_review</mat-icon>
+          </button>
+          <button mat-flat-button [routerLink]="['/prodotto', product.id]" class="go-button" color="primary" aria-label="icon button with a review icon">
+            Vai a prodotto <mat-icon>article</mat-icon>
+          </button>
+          <button mat-flat-button (click)="dialogDeleteProd(product.id, product.data.title)" class="delete-button" color="warn" aria-label="icon button with a delete icon">
+            Elimina prodotto <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+  
+  <!-- GRID -->
+  <mat-grid-list cols="3" rowHeight="350px" *ngIf="panelGrid" >
+    <mat-grid-tile *ngFor="let product of products | async">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            <h3>{{ product.data.title }}</h3>
+            <button (click)="dialogDeleteProd(product.id, product.data.title)" mat-icon-button color="warn" class="delete-button" aria-label="icon button with a delete icon">
+              <mat-icon class="mat-18">delete</mat-icon>
+            </button>
+            <button *ngIf="product.data.reviews" [routerLink]="['/recensioni', product.id]" mat-icon-button color="primary" class="edit-button" aria-label="icon button with a review icon">
+              <mat-icon class="mat-18">rate_review</mat-icon>
+            </button>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div>
+            <p>
+              <strong>Prezzo:</strong> {{ product.data.price }} € <br>
+              <strong>Categoria:</strong> {{ product.data.category }} <br>
+              <strong>Dipendente:</strong> {{ product.data.employee }} <br>
+              <strong>Descrizione:</strong> {{ product.data.description }}
+            </p>
+          </div>
+          <button mat-flat-button [routerLink]="['/prodotto', product.id]" color="primary" class="go-button" aria-label="icon button with a review icon">
+            Prodotto <mat-icon>article</mat-icon>
+          </button>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <br>
+
+  <mat-paginator class="mat-elevation-z2" [length]="100"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[10, 20, 50, 100]">
+  </mat-paginator>
+  
+</div>

@@ -1,0 +1,18 @@
+.full-width-table {
+  width: 100%;
+}
+
+.grid-container {
+  margin: 20px;
+}
+
+.products {
+  width: 100%;
+}
+
+.products-title {
+  display: flex;
+  align-items: baseline;
+  flex-direction: row;
+  justify-content: space-between;
+}

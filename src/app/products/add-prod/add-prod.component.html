@@ -1,0 +1,93 @@
+<div>
+    <div class="add-title">
+      <h2 class="primary">Aggiungi un prodotto</h2>
+    </div>
+    <div>
+      <form [formGroup]="addCusForm">
+        <mat-grid-list cols="1" rowHeight="80px">
+
+          <mat-grid-tile>
+            <div class="text-inside">
+                <mat-form-field>
+                    <input matInput placeholder="Titolo" value={{title}} formControlName="title" required>
+                    <mat-error *ngIf="addCusForm.controls.title.hasError('required')">
+                        Inserisci il titolo del prodotto
+                    </mat-error>
+                    <mat-error *ngIf="addCusForm.controls.title.hasError('pattern')">
+                        Per favore inserisci solo lettere o numeri
+                    </mat-error>
+                </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="text-inside">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Categoria" value={{category}} formControlName="category" required>
+                    <mat-error *ngIf="addCusForm.controls.category.hasError('required')">
+                        Inserisci la categoria del prodotto
+                    </mat-error>
+                    <mat-error *ngIf="addCusForm.controls.category.hasError('pattern')">
+                        Per favore inserisci solo lettere (no spazi) 
+                    </mat-error>
+                </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="text-inside">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Prezzo" value={{price}} formControlName="price" required>
+                    <mat-error *ngIf="addCusForm.controls.price.hasError('required')">
+                        Inserisci il prezzo del prodotto
+                    </mat-error>
+                    <mat-error *ngIf="addCusForm.controls.price.hasError('pattern')">
+                        Per favore inserisci solo numeri (max 2 decimali)
+                    </mat-error>
+                </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="text-inside">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Dipendente" value={{employee}} formControlName="employee" required>
+                    <mat-error *ngIf="addCusForm.controls.employee.hasError('required')">
+                        Inserisci un dipendente
+                    </mat-error>
+                    <mat-error *ngIf="addCusForm.controls.employee.hasError('pattern')">
+                        Per favore inserisci solo lettere (no spazi)
+                    </mat-error>
+                </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="text-inside">
+                    <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Descrizione" value={{desc}} formControlName="description">
+                    <mat-error *ngIf="addCusForm.controls.description.hasError('required')">
+                        Inserisci la descrizione del prodotto
+                    </mat-error>
+                    <mat-error *ngIf="addCusForm.controls.description.hasError('pattern')">
+                        Per favore inserisci solo lettere
+                    </mat-error>
+                    </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+        </mat-grid-list>
+        
+      </form>
+    </div>
+
+    <div class="btn-sec">
+        <div mat-dialog-actions>
+            <button mat-raised-button type="button" color="warn" class="Discard-btn" (click)="close()" cdkFocusInitial>ANNULLA</button>
+            <button mat-raised-button type="submit" color="primary" class="Update-btn" (click)="save()" [disabled]="!addCusForm.valid" >PROCEDI</button>
+        </div>
+        <br>
+    </div>
+
+  </div>
+  

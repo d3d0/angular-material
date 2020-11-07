@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Conferma</h2>
+<div mat-dialog-content>
+  <p>Vuoi veramente cancellare il prodotto <strong>{{data.prodName}}</strong>?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button color="primary" (click)="onNoClick()">ANNULLA</button>
+  <button mat-flat-button color="warn" [mat-dialog-close]="data.prodId" cdkFocusInitial>PROCEDI</button>
+</div>
+<br>

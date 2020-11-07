@@ -1,0 +1,52 @@
+<div class="grid-container">
+    <div class="custom-card-container">
+        <div class="custom-card">
+            <div class="products-title">
+                <h1 *ngIf="prodotto">
+                    {{prodotto.title}}
+                </h1>
+            </div>
+            <hr>
+            <button mat-flat-button (click)="getPreviousUrl()" color="primary" aria-label="Go Back"><mat-icon>arrow_left</mat-icon> Torna indietro</button>
+            <div class="spinner-container">
+                <mat-spinner *ngIf="isLoading" diameter="50" color="primary"></mat-spinner>
+            </div>
+            <br>
+
+            <div *ngIf="!isLoading">
+                <p><strong>Prezzo:</strong> {{ prodotto.price }} €</p>
+                <p><strong>Categoria:</strong> {{ prodotto.category }}</p>
+                <p><strong>Dipendente:</strong> {{ prodotto.employee }}</p>
+                <p><strong>Descrizione:</strong> {{ prodotto.description }}</p>
+                <hr>
+            </div>
+
+            <h4 *ngIf="!isLoading"><strong>Recensioni</strong></h4>
+            <ng-container *ngIf="recensioni?.length > 0">
+                <div class="review" *ngFor="let review of recensioni" >
+                    <!-- 
+                    <p class="review-rating">
+                        <ng-container  *ngFor="let rating of review.ratingFull">
+                            <fa-icon [icon]="faStar"></fa-icon>
+                        </ng-container>
+                        <ng-container  *ngFor="let rating of review.ratingEmpty">
+                            <fa-icon [icon]="farStar"></fa-icon>
+                        </ng-container>
+                    </p>
+                    -->
+                    <p class="review-summary">{{ review?.title }}</p>
+                    <p class="review-feedback">{{ review?.description }}</p>
+                    <p class="reviewBy">
+                        <span class="review-date">{{ (review?.reviewDate ?  review?.reviewDate : 1581470956443) | date: 'dd/MM/yyyy'}}</span>
+                        - 
+                        <span class="review-author">{{ review?.user }}</span>
+                    </p>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="messaggio">
+                <p>Non sono presenti recensioni per questo prodotto.</p>
+            </ng-container>
+
+        </div>
+    </div>
+</div>

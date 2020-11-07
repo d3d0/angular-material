@@ -1,0 +1,123 @@
+.grid-container {
+    margin: 20px;
+}
+
+.products {
+    width: 100%;
+}
+
+.products-title {
+    display: flex;
+    align-items: baseline;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.edit-button {
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.go-button {
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+/* panel */
+
+/* .mat-expansion-panel .delete-button {
+    position: absolute;
+    top: 45px;
+    right: 7px;
+}
+.mat-expansion-panel .edit-button {
+    position: absolute;
+    top: 45px;
+    right: 40px;
+} */
+
+/* card */
+
+.dashboard-card {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+}
+.more-button {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+.mat-card-title .delete-button {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+.mat-card-title .edit-button {
+    position: absolute;
+    top: 5px;
+    right: 40px;
+}
+.dashboard-card-content {
+    text-align: left;
+}
+
+/* table */
+
+/* #users {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+#users td, #users th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+#users tr:nth-child(even){background-color: #f2f2f2;}
+#users tr:hover {background-color: #ddd;}
+#users th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #1976d2;
+    color: white;
+}
+#users th h3 {
+    color: white;
+} */
+
+
+.review{
+    border-bottom: 1px solid rgba(120, 122, 124, 0.25);
+    padding: 1em 0.75em;
+}
+
+.review-rating{
+    font-size: 0.9em;
+    color: #C9002B;
+}
+
+.review-summary{
+    font-size: 1em;
+    font-weight: bold;
+    color: #555;
+}
+
+.review-feedback{
+    font-size: 1em;
+}
+
+.reviewBy{
+    font-size: 0.85em;
+}
+
+.review-author{
+    color: #3f51b5;
+    font-weight: bold;
+}
+
+.review:last-child{
+    border: 0;
+}
